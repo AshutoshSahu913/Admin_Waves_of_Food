@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Admin Waves of Food</string>
+    <string name="already_have_an_account">Already Have An Account?</string>
+    <string name="create_account">Create Account</string>
+    <string name="password">Password</string>
+    <string name="email_or_phone_number">Email or Phone Number</string>
+    <string name="name_of_restaurant">Name of Restaurant</string>
+    <string name="name_of_owner">Name of Owner</string>
+    <string name="choose_location">Choose Location</string>
+    <string name="choose_your_location">Choose Your Location</string>
+    <string name="sign_up_here_for_your_n_admin_dashboard">Sign Up Here For Your\n Admin Dashboard</string>
+    <string name="waves_of_food">Waves Of Food</string>
+</resources>
