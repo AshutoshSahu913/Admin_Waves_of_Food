@@ -63,7 +63,7 @@
             android:id="@+id/inputEmail"
             android:layout_width="325dp"
             android:layout_height="57dp"
-            android:layout_margin="2dp"
+            android:layout_margin="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/edittextshape"
             android:drawableStart="@drawable/mail"
@@ -82,7 +82,6 @@
             android:layout_width="325dp"
             android:layout_height="57dp"
             android:layout_margin="10dp"
-
             android:background="@drawable/edittextshape"
             android:drawableStart="@drawable/lock"
             android:drawablePadding="15dp"

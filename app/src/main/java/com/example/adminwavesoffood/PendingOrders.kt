@@ -26,5 +26,9 @@ class PendingOrders : AppCompatActivity() {
         val adapter = PendingAdapter(list, this)
         binding.rvPendingOrder.layoutManager = LinearLayoutManager(this)
         binding.rvPendingOrder.adapter = adapter
+
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
     }
 }

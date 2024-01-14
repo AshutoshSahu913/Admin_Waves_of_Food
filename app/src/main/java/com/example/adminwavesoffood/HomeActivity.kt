@@ -34,6 +34,9 @@ class HomeActivity : AppCompatActivity() {
                 startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
                 finish()
             }
+            pendingOrder.setOnClickListener {
+                startActivity(Intent(this@HomeActivity, PendingOrders::class.java))
+            }
         }
     }
 }
