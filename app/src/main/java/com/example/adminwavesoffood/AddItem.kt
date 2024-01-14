@@ -24,5 +24,9 @@ class AddItem : AppCompatActivity() {
         binding.inputItemImg.setOnClickListener {
             pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
+
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
     }
 }
