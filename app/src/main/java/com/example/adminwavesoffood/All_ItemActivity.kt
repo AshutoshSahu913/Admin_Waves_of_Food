@@ -30,5 +30,9 @@ class All_ItemActivity : AppCompatActivity() {
         binding.rvItemList.adapter = adapter
 
         val Adapter = ItemAdapter(list, this)
+
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
     }
 }

@@ -23,6 +23,17 @@ class HomeActivity : AppCompatActivity() {
             orderDispatch.setOnClickListener {
                 startActivity(Intent(this@HomeActivity, OutForDelivery::class.java))
             }
+
+            addNewUser.setOnClickListener {
+                startActivity(Intent(this@HomeActivity, AddNewUser::class.java))
+            }
+            profile.setOnClickListener {
+                startActivity(Intent(this@HomeActivity, AdminProfile::class.java))
+            }
+            logout.setOnClickListener {
+                startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                finish()
+            }
         }
     }
 }

@@ -24,5 +24,8 @@ class OutForDelivery : AppCompatActivity() {
         val adapter = DeliveryAdapter(list, this)
         binding.rvOrder.layoutManager = LinearLayoutManager(this)
         binding.rvOrder.adapter = adapter
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
     }
 }
