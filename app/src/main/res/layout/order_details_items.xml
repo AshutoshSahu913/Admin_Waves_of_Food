@@ -3,9 +3,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView2"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:elevation="5dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="5dp"
@@ -32,7 +32,7 @@
             app:cardCornerRadius="10dp">
 
             <ImageView
-                android:id="@+id/pendingOrderImg"
+                android:id="@+id/foodImg"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:scaleType="centerCrop"
@@ -46,12 +46,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pendingCustomerName"
+                android:id="@+id/foodName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/yeonsung_regular"
-                android:text="Customer Name"
+                android:text="@string/food_ka_name"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -61,61 +61,40 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-<!--
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:fontFamily="@font/yeonsung_regular"
-                    android:text="Quantity: "
+                    android:text="@string/quantity"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
 
                 <TextView
-                    android:id="@+id/pendingItemQty"
+                    android:id="@+id/foodQty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/yeonsung_regular"
-                    android:text="5"
+                    android:text="@string/_5"
                     android:textColor="@color/appColor"
                     android:textSize="20sp" />
--->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/yeonsung_regular"
-                    android:text="Price : "
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-
-                <TextView
-                    android:id="@+id/pendingItemTotalPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:fontFamily="@font/yeonsung_regular"
-                    android:text="50"
-                    android:textColor="@color/appColor"
-                    android:textSize="18sp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
 
-        <Button
-            android:id="@+id/pendingOrderBtn"
+        <TextView
+            android:id="@+id/foodPrice"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:background="@drawable/shape"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:fontFamily="@font/yeonsung_regular"
-            android:text="Accept"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:text="@string/_20"
+            android:textColor="@color/appColor"
+            android:textSize="20sp" />
 
 
     </LinearLayout>

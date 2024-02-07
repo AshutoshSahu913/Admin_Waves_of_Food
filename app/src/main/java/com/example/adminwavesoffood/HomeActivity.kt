@@ -18,7 +18,7 @@ class HomeActivity : AppCompatActivity() {
                 startActivity(Intent(this@HomeActivity, AddItem::class.java))
             }
             addMenuItem.setOnClickListener {
-                startActivity(Intent(this@HomeActivity, All_ItemActivity::class.java))
+                startActivity(Intent(this@HomeActivity, AllItemActivity::class.java))
             }
             orderDispatch.setOnClickListener {
                 startActivity(Intent(this@HomeActivity, OutForDelivery::class.java))

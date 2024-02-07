@@ -1,24 +1,37 @@
 package com.example.adminwavesoffood.Adapter
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.adminwavesoffood.Model.ItemModel
 import com.example.adminwavesoffood.databinding.ItemListBinding
+import com.google.firebase.database.DatabaseReference
 
-class ItemAdapter(var itemList: ArrayList<ItemModel>, var context: Context) :
-    RecyclerView.Adapter<ItemAdapter.MyViewHolder>() {
+class MenuItemAdapter(
+    var itemList: ArrayList<ItemModel>,
+    var context: Context,
+    var databaseReference: DatabaseReference
+) :
+    RecyclerView.Adapter<MenuItemAdapter.MyViewHolder>() {
     private val itemQuantities = IntArray(itemList.size) { 1 }
 
     inner class MyViewHolder(var binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
-
             binding.apply {
-
                 val quantity = itemQuantities[position]
+                val menuItem = itemList[position]
+                val uriString = menuItem.foodImg
+                val uri = Uri.parse(uriString)
+
+                foodName.text = menuItem.foodName
+                foodPrice.text = menuItem.foodPrice
                 foodQty.text = quantity.toString()
+                Glide.with(context).load(uri).into(foodImg)
+
                 minusBtn.setOnClickListener {
                     deceaseQuantity(position)
                 }
@@ -32,6 +45,7 @@ class ItemAdapter(var itemList: ArrayList<ItemModel>, var context: Context) :
                         deleteItems(itemPosition)
                     }
                 }
+
             }
         }
 
@@ -56,26 +70,20 @@ class ItemAdapter(var itemList: ArrayList<ItemModel>, var context: Context) :
             notifyItemRangeChanged(position, itemList.size)
         }
 
-
     }
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemAdapter.MyViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MenuItemAdapter.MyViewHolder {
         var binding = ItemListBinding.inflate(LayoutInflater.from(context), parent, false)
         return MyViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ItemAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MenuItemAdapter.MyViewHolder, position: Int) {
         holder.bind(position)
 
-        var model = itemList[position]
-        holder.binding.foodName.text = model.foodName
-//        holder.binding.foodDes.text = model.foodDes
-        holder.binding.foodImg.setImageResource(model.foodImg)
-        holder.binding.foodPrice.text = model.foodPrice
-        holder.binding.foodQty.text = model.foodQty.toString()
     }
-
 
     override fun getItemCount(): Int {
         return itemList.size

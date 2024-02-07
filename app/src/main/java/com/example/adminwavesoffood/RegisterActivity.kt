@@ -51,8 +51,6 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 createAccount(email, password)
             }
-
-
         }
 
         binding.alreadyHaveBtn.setOnClickListener {
@@ -63,8 +61,6 @@ class RegisterActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, locationList)
         val autoCompleteTextView = binding.listOfLocation
         autoCompleteTextView.setAdapter(adapter)
-
-
     }
 
     private fun createAccount(email: String, password: String) {
@@ -104,7 +100,7 @@ class RegisterActivity : AppCompatActivity() {
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
         //save user ka data to the firebase ke database
-        database.child("user").child(userId).setValue(user)
+        database.child("userAdmin").child(userId).setValue(user)
 
     }
 }

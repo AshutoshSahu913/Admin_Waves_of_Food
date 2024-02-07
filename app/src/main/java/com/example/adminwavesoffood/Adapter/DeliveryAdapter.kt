@@ -6,10 +6,10 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.adminwavesoffood.Model.OrderModel
+import com.example.adminwavesoffood.Model.OrderDetails
 import com.example.adminwavesoffood.databinding.OrderListBinding
 
-class DeliveryAdapter(var orderList: ArrayList<OrderModel>, var context: Context) :
+class DeliveryAdapter(var orderList: ArrayList<OrderDetails>, var context: Context) :
     RecyclerView.Adapter<DeliveryAdapter.MyViewHolder>() {
 
 
@@ -19,15 +19,15 @@ class DeliveryAdapter(var orderList: ArrayList<OrderModel>, var context: Context
         fun bind(position: Int) {
             binding.apply {
                 var model = orderList[position]
-                customerName.text = model.customerName
-                paymentStatus.text = model.moneyStatus
+                customerName.text = model.userName
+                paymentStatus.text = model.orderAccepted.toString()
 
                 val colorMap = mapOf(
                     "received" to Color.GREEN, "notReceived" to Color.RED, "Pending" to Color.GRAY
                 )
-                paymentStatus.setTextColor(colorMap[model.moneyStatus] ?: Color.BLACK)
+                paymentStatus.setTextColor(colorMap[model.orderAccepted.toString()] ?: Color.BLACK)
                 cardColor.backgroundTintList =
-                    ColorStateList.valueOf(colorMap[model.moneyStatus] ?: Color.BLACK)
+                    ColorStateList.valueOf(colorMap[model.orderAccepted.toString()] ?: Color.BLACK)
             }
         }
 
