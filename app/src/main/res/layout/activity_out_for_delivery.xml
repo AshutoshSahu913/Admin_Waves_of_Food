@@ -7,6 +7,7 @@
     android:background="@color/white"
     tools:context=".OutForDelivery">
 
+
     <ImageView
         android:id="@+id/backBtn"
         android:layout_width="30dp"
@@ -26,16 +27,18 @@
         android:fontFamily="@font/yeonsung_regular"
         android:text="Out For Delivery"
         android:textColor="@color/black"
-        android:textSize="40sp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/backBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backBtn" />
+        app:layout_constraintTop_toTopOf="@+id/backBtn" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvOrder"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

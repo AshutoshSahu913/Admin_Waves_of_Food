@@ -66,7 +66,7 @@
             android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/yeonsung_regular"
                 android:text="Name : "
@@ -95,7 +95,7 @@
             android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/yeonsung_regular"
                 android:text="Address : "
@@ -123,7 +123,7 @@
             android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/yeonsung_regular"
                 android:text="Phone : "
@@ -143,36 +143,41 @@
         </LinearLayout>
 
 
-        <LinearLayout
+<!--        <LinearLayout-->
 
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="5dp">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/yeonsung_regular"-->
+<!--                android:text="Email : "-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/profileEdEmail"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:fontFamily="@font/yeonsung_regular"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="Golu12@gmail.com"-->
+<!--                android:textColor="@color/iconColor"-->
+<!--                android:textSize="18sp" />-->
+<!--        </LinearLayout>-->
+
+
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"
-            android:padding="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/yeonsung_regular"
-                android:text="Email : "
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/profileEdEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/yeonsung_regular"
-                android:padding="5dp"
-                android:text="Golu12@gmail.com"
-                android:textColor="@color/iconColor"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
+            android:layout_height="1dp"
+            android:background="#AFACAC"/>
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -194,6 +199,7 @@
                 android:id="@+id/profileTotalAmount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="end"
                 android:layout_weight="1"
                 android:fontFamily="@font/yeonsung_regular"
                 android:padding="5dp"
