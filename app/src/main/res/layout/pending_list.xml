@@ -3,9 +3,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView2"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:elevation="5dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="5dp"
@@ -61,27 +61,27 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-<!--
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/yeonsung_regular"
-                    android:text="Quantity: "
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                <!--
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:fontFamily="@font/yeonsung_regular"
+                                    android:text="Quantity: "
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
 
 
-                <TextView
-                    android:id="@+id/pendingItemQty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:fontFamily="@font/yeonsung_regular"
-                    android:text="5"
-                    android:textColor="@color/appColor"
-                    android:textSize="20sp" />
--->
+                                <TextView
+                                    android:id="@+id/pendingItemQty"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/yeonsung_regular"
+                                    android:text="5"
+                                    android:textColor="@color/appColor"
+                                    android:textSize="20sp" />
+                -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,13 +107,14 @@
         </LinearLayout>
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/pendingOrderBtn"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="@drawable/shape"
             android:fontFamily="@font/yeonsung_regular"
             android:text="Accept"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16sp" />
 

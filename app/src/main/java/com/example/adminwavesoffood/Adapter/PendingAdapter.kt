@@ -21,6 +21,8 @@ class PendingAdapter(
     RecyclerView.Adapter<PendingAdapter.MyViewHolder>() {
     interface OnItemClicked {
         fun onItemClickListener(position: Int)
+        fun onItemAcceptClickListener(position: Int)
+        fun onItemDispatchClickListener(position: Int)
     }
 
     inner class MyViewHolder(var binding: PendingListBinding) :
@@ -45,6 +47,7 @@ class PendingAdapter(
                         if (!isAccepted) {
                             text = "Dispatch"
                             setBackgroundResource(R.drawable.un_shape)
+                            itemClicked.onItemAcceptClickListener(position)
                             isAccepted = true
                             showToast("Order is Accepted")
                         } else {
@@ -52,6 +55,7 @@ class PendingAdapter(
                             totalPrice.removeAt(position)
                             foodImg.removeAt(position)
                             notifyItemRemoved(position)
+                            itemClicked.onItemDispatchClickListener(position)
                             isAccepted = false
                             showToast("Order is Dispatch")
                         }
@@ -61,7 +65,6 @@ class PendingAdapter(
                     }
                 }
             }
-
         }
     }
 
@@ -83,5 +86,6 @@ class PendingAdapter(
     override fun getItemCount(): Int {
         return customerName.size
     }
+
 
 }

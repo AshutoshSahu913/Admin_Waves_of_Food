@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminwavesoffood.Adapter.PendingAdapter
 import com.example.adminwavesoffood.Model.OrderDetails
@@ -20,10 +21,12 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
     }
 
     private var listOfName: ArrayList<String> = arrayListOf()
+
     //    private var listOfTotalQty: MutableList<String> = mutableListOf()
     private var listOfTotalPrice: ArrayList<String> = arrayListOf()
     private var listOfImgFirstFoodOrder: ArrayList<String> = arrayListOf()
-//    private var listOfImgFirstOrder: ArrayList<String> = arrayListOf()
+
+    //    private var listOfImgFirstOrder: ArrayList<String> = arrayListOf()
     private var listOfOrderItem: ArrayList<OrderDetails> = arrayListOf()
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseOrderDetails: DatabaseReference
@@ -67,17 +70,19 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         for (orderItem in listOfOrderItem) {
             //add data to respective list for population the recyclerview
             orderItem.userName?.let { listOfName.add(it) }
-            Log.d("LIST_SIZE","SIZE - ${listOfName.size}")
-//            orderItem.foodQty?.let { listOfTotalQty.add(it) }
             orderItem.totalPrice?.let { listOfTotalPrice.add(it) }
             orderItem.foodImages?.filterNot { it.isEmpty() }?.forEach {
                 listOfImgFirstFoodOrder.add(it)
             }
         }
-        setAdapter(listOfName,listOfTotalPrice,listOfImgFirstFoodOrder)
+        setAdapter(listOfName, listOfTotalPrice, listOfImgFirstFoodOrder)
     }
 
-    private fun setAdapter(listOfName: ArrayList<String>, listOfTotalPrice: ArrayList<String>, listOfImgFirstFoodOrder: ArrayList<String>) {
+    private fun setAdapter(
+        listOfName: ArrayList<String>,
+        listOfTotalPrice: ArrayList<String>,
+        listOfImgFirstFoodOrder: ArrayList<String>
+    ) {
         val adapter = PendingAdapter(
             listOfName,
             listOfTotalPrice,
@@ -97,6 +102,51 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         val userOderDetails = listOfOrderItem[position]
         intent.putExtra("UserOrderDetails", userOderDetails)
         startActivity(intent)
+    }
+
+    override fun onItemAcceptClickListener(position: Int) {
+        //handle item acceptance and update database
+        val childItemPushKey = listOfOrderItem[position].itemPushKey
+        val clickItemOrderReference = childItemPushKey?.let {
+            database.reference.child("OrderDetails").child(it)
+        }
+        clickItemOrderReference?.child("AcceptedOrder")?.setValue(true)
+        updateOrderAcceptStatus(position)
+
+    }
+
+    private fun updateOrderAcceptStatus(position: Int) {
+        //update order acceptance in user's buyHistory and OrderDetails
+        val userIdOfClickedItem = listOfOrderItem[position].userUid
+        val pushKeyOfClickedItem = listOfOrderItem[position].itemPushKey
+        val buyHistoryReference =
+            database.reference.child("user").child(userIdOfClickedItem!!).child("BuyHistory")
+                .child(pushKeyOfClickedItem!!)
+        buyHistoryReference.child("AcceptedOrder").setValue(true)
+        databaseOrderDetails.child(pushKeyOfClickedItem).child("AcceptedOrder").setValue(true)
+    }
+
+    override fun onItemDispatchClickListener(position: Int) {
+        val dispatchItemPushKey = listOfOrderItem[position].itemPushKey
+        val dispatchItemOrderReference =
+            database.reference.child("CompleteOrder ").child(dispatchItemPushKey!!)
+        dispatchItemOrderReference.setValue(listOfOrderItem[position])
+            .addOnSuccessListener {
+                deleteThisItemFromOrderDetails(dispatchItemPushKey)
+            }
+
+    }
+
+    private fun deleteThisItemFromOrderDetails(dispatchItemPushKey: String) {
+        val orderDetailsItemReference =
+            database.reference.child("OrderDetails").child(dispatchItemPushKey)
+        orderDetailsItemReference.removeValue()
+            .addOnSuccessListener {
+                Toast.makeText(this, "Order is Dispatched", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Order is not Dispatched", Toast.LENGTH_SHORT).show()
+            }
     }
 
 }
