@@ -3,8 +3,12 @@ package com.example.adminwavesoffood
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import com.example.adminwavesoffood.Model.OrderDetails
 import com.example.adminwavesoffood.databinding.ActivityHomeBinding
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.Circle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -18,13 +22,12 @@ class HomeActivity : AppCompatActivity() {
     }
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
-    private lateinit var completedOrderReference: DatabaseReference
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         auth=FirebaseAuth.getInstance()
+
 
         binding.apply {
             addMenu.setOnClickListener {
@@ -51,10 +54,10 @@ class HomeActivity : AppCompatActivity() {
                 val intent = Intent(this@HomeActivity, PendingOrders::class.java)
                 startActivity(intent)
             }
+            binding.loader.visibility= View.VISIBLE
             pendingOrder()
             completedOrder()
             wholeTimeEarning()
-
         }
     }
 
@@ -66,12 +69,14 @@ class HomeActivity : AppCompatActivity() {
         completedOrderReference1.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (orderSnapshot in snapshot.children) {
+
                     val completeOrder = orderSnapshot.getValue(OrderDetails::class.java)
                     completeOrder?.totalPrice?.replace("₹", "")?.toIntOrNull()
                         ?.let { i ->
                             listOfTotalPay.add(i)
                         }
                 }
+                binding.loader.visibility= View.GONE
                 binding.wholeTimeEarning.text = listOfTotalPay.sum().toString() + " ₹"
 
             }
@@ -92,8 +97,8 @@ class HomeActivity : AppCompatActivity() {
         completedOrderReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 completeOrderItemCount = snapshot.childrenCount.toInt()
+                binding.loader.visibility= View.GONE
                 binding.completeOrderCount.text = completeOrderItemCount.toString()
-
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -109,6 +114,7 @@ class HomeActivity : AppCompatActivity() {
         var pendingOrderItemCount = 0
         pendingOrderReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                binding.loader.visibility= View.GONE
                 pendingOrderItemCount = snapshot.childrenCount.toInt()
                 binding.pendingOrder.text = pendingOrderItemCount.toString()
             }
@@ -122,5 +128,10 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+    private fun loader(){
+        val progressBar = binding.loader as ProgressBar
+        val circle: Sprite = Circle()
+        progressBar.indeterminateDrawable = circle
+    }
 
 }

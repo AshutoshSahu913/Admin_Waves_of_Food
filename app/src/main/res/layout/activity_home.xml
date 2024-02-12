@@ -358,6 +358,20 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/loader"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/appColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView" />
+
+
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow2"
         android:layout_width="0dp"

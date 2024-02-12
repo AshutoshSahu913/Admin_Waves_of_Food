@@ -39,6 +39,12 @@ class AllItemActivity : AppCompatActivity() {
         loader2()
         retrieveMenuItem()
 
+        if (menuItems.isEmpty()) {
+            binding.NoFoodItem.visibility = View.VISIBLE
+        } else {
+            binding.NoFoodItem.visibility = View.GONE
+        }
+
         binding.backBtn.setOnClickListener {
             finish()
         }
@@ -87,19 +93,18 @@ class AllItemActivity : AppCompatActivity() {
     private fun deleteMenuItem(position: Int) {
         val menuItemToDelete = menuItems[position]
         val menuItemKey = menuItemToDelete.key
-        var foodMenuReference = database.reference.child("Menu").child(menuItemKey!!)
+        val foodMenuReference = database.reference.child("Menu").child(menuItemKey!!)
         foodMenuReference.removeValue().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 menuItems.removeAt(position)
                 binding.rvItemList.adapter?.notifyItemRemoved(position)
             } else {
                 Toast.makeText(this, "Item not Deleted!", Toast.LENGTH_SHORT).show()
-
             }
         }
     }
 
-    fun loader2() {
+    private fun loader2() {
         // code for loader
         val progressBar = binding.loader2 as ProgressBar
         val circle: Sprite = Circle()

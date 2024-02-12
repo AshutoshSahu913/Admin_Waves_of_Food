@@ -42,6 +42,12 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
 
         loader()
         binding.loader.visibility = View.VISIBLE
+
+        if (listOfOrderItem.isEmpty()) {
+            binding.NoPendingOrder.visibility = View.VISIBLE
+        } else {
+            binding.NoPendingOrder.visibility = View.GONE
+        }
         getOrderDetails()
 
         binding.backBtn.setOnClickListener {
@@ -58,6 +64,7 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
                         listOfOrderItem.add(it)
                     }
                 }
+
                 addDataToListForRecyclerView(/*listOfOrderItem*/)
             }
 

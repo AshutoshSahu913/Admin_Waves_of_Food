@@ -45,6 +45,8 @@ class LoginActivity : AppCompatActivity() {
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.your_web_client_id)).requestEmail().build()
+
+
         //initialize firebase auth
         auth = Firebase.auth
 
@@ -80,6 +82,9 @@ class LoginActivity : AppCompatActivity() {
             launcher.launch(signIntent)
         }
 
+        binding.facebookBtn.setOnClickListener {
+
+        }
 
     }
 
