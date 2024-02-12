@@ -46,17 +46,17 @@ class PendingAdapter(
                         "Dispatch"
                     }
                     setOnClickListener {
+                        setBackgroundResource(R.drawable.un_shape)
                         if (!isAccepted) {
                             text = "Dispatch"
-                            setBackgroundResource(R.drawable.un_shape)
                             isAccepted = true
-                            itemClicked.onItemAcceptClickListener(position)
                             showToast("Order is Accepted")
+                            itemClicked.onItemAcceptClickListener(position)
                         } else {
-                            isAccepted = false
-                            itemClicked.onItemDispatchClickListener(position)
+//                            isAccepted = false
                             removeItem(position)
                             showToast("Order is Dispatch")
+                            itemClicked.onItemDispatchClickListener(position)
                         }
                     }
                 }

@@ -2,10 +2,14 @@ package com.example.adminwavesoffood
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminwavesoffood.Adapter.DeliveryAdapter
 import com.example.adminwavesoffood.Model.OrderDetails
 import com.example.adminwavesoffood.databinding.ActivityOutForDeliveryBinding
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.Circle
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -25,6 +29,8 @@ class OutForDelivery : AppCompatActivity() {
         setContentView(binding.root)
 
         //retrieve and display completed order
+        loader()
+        binding.loader2.visibility = View.VISIBLE
         retrieveCompleteOrderDetails()
 
         binding.backBtn.setOnClickListener {
@@ -71,8 +77,23 @@ class OutForDelivery : AppCompatActivity() {
             moneyStatus.add(order.paymentReceived)
         }
 
-        val adapter = DeliveryAdapter(customerName, moneyStatus, this)
-        binding.rvOrder.layoutManager = LinearLayoutManager(this)
-        binding.rvOrder.adapter = adapter
+        if (listOfCompleteOrderList.isEmpty()) {
+            binding.emptyTxt.visibility = View.VISIBLE
+            binding.loader2.visibility = View.GONE
+        } else {
+            binding.loader2.visibility = View.GONE
+            binding.emptyTxt.visibility = View.GONE
+            val adapter = DeliveryAdapter(customerName, moneyStatus, this)
+            binding.rvOrder.layoutManager = LinearLayoutManager(this)
+            binding.rvOrder.adapter = adapter
+        }
     }
+
+    fun loader() {
+        // code for loader
+        val progressBar = binding.loader2 as ProgressBar
+        val circle: Sprite = Circle()
+        progressBar.indeterminateDrawable = circle
+    }
+
 }

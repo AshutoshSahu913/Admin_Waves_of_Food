@@ -30,21 +30,20 @@ class DeliveryAdapter(
                 }
 
                 val colorMap = mapOf(
-                    true to Color.GREEN, false to Color.RED, "Pending" to Color.GRAY
+                    true to Color.GREEN, false to Color.RED
                 )
                 paymentStatus.setTextColor(colorMap[moneyStatus[position]] ?: Color.BLACK)
                 cardColor.backgroundTintList =
                     ColorStateList.valueOf(colorMap[moneyStatus[position]] ?: Color.BLACK)
             }
         }
-
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): DeliveryAdapter.MyViewHolder {
-        var binding = OrderListBinding.inflate(LayoutInflater.from(context), parent, false)
+        val binding = OrderListBinding.inflate(LayoutInflater.from(context), parent, false)
         return MyViewHolder(binding)
     }
 

@@ -41,7 +41,7 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         databaseOrderDetails = database.reference.child("OrderDetails")
 
         loader()
-        binding.loader.visibility= View.VISIBLE
+        binding.loader.visibility = View.VISIBLE
         getOrderDetails()
 
         binding.backBtn.setOnClickListener {
@@ -85,7 +85,7 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         listOfTotalPrice: ArrayList<String>,
         listOfImgFirstFoodOrder: ArrayList<String>
     ) {
-        binding.loader.visibility= View.GONE
+        binding.loader.visibility = View.GONE
         val adapter = PendingAdapter(
             listOfName,
             listOfTotalPrice,
@@ -95,7 +95,6 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         )
         binding.rvPendingOrder.layoutManager = LinearLayoutManager(this)
         binding.rvPendingOrder.adapter = adapter
-
 
     }
 
@@ -114,8 +113,19 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
             database.reference.child("OrderDetails").child(it)
         }
         clickItemOrderReference?.child("orderAccepted")?.setValue(true)
+//        clickItemOrderReference?.child("AcceptedOrder")?.setValue(true)
         updateOrderAcceptStatus(position)
 
+    }
+
+    override fun onItemDispatchClickListener(position: Int) {
+        val dispatchItemPushKey = listOfOrderItem[position].itemPushKey
+        val dispatchItemOrderReference =
+            database.reference.child("CompletedOrder").child(dispatchItemPushKey!!)
+        dispatchItemOrderReference.setValue(listOfOrderItem[position])
+            .addOnSuccessListener {
+                deleteThisItemFromOrderDetails(dispatchItemPushKey)
+            }
     }
 
     private fun updateOrderAcceptStatus(position: Int) {
@@ -129,16 +139,6 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         databaseOrderDetails.child(pushKeyOfClickedItem).child("orderAccepted").setValue(true)
     }
 
-    override fun onItemDispatchClickListener(position: Int) {
-        val dispatchItemPushKey = listOfOrderItem[position].itemPushKey
-        val dispatchItemOrderReference =
-            database.reference.child("CompletedOrder").child(dispatchItemPushKey!!)
-        dispatchItemOrderReference.setValue(listOfOrderItem[position])
-            .addOnSuccessListener {
-                deleteThisItemFromOrderDetails(dispatchItemPushKey)
-            }
-    }
-
     private fun deleteThisItemFromOrderDetails(dispatchItemPushKey: String) {
         val orderDetailsItemReference =
             database.reference.child("OrderDetails").child(dispatchItemPushKey)
@@ -150,6 +150,7 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
                 Toast.makeText(this, "Order is not Dispatched", Toast.LENGTH_SHORT).show()
             }
     }
+
     fun loader() {
         // code for loader
         val progressBar = binding.loader as ProgressBar

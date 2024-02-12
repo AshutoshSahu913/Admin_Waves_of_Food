@@ -46,7 +46,6 @@ class HomeActivity : AppCompatActivity() {
             logout.setOnClickListener {
                 auth.signOut()
                 startActivity(Intent(this@HomeActivity, RegisterActivity::class.java))
-                finish()
             }
             pendingOrderBtn.setOnClickListener {
                 val intent = Intent(this@HomeActivity, PendingOrders::class.java)

@@ -24,7 +24,7 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -37,7 +37,7 @@
                 android:fontFamily="@font/yeonsung_regular"
                 android:text="Customer Name"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/paymentMethod"
@@ -46,7 +46,7 @@
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/yeonsung_regular"
                 android:text="Payments"
-                android:textColor="@color/black"
+                android:textColor="#81000000"
                 android:textSize="14sp" />
 
 
@@ -58,7 +58,7 @@
                 android:fontFamily="@font/yeonsung_regular"
                 android:text="Not Received "
                 android:textColor="#BE1515"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -70,25 +70,25 @@
             android:orientation="vertical">
 
 
-                <TextView
-                    android:id="@+id/orderDetalis"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:fontFamily="@font/yeonsung_regular"
-                    android:gravity="center"
-                    android:text="Delivered"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+            <TextView
+                android:id="@+id/orderDetalis"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/yeonsung_regular"
+                android:gravity="center"
+                android:text="Delivered"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardColor"
                 android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_margin="6dp"
                 android:padding="4dp"
-                android:layout_height="40dp"
                 app:cardBackgroundColor="#4BFF5D"
                 app:cardCornerRadius="50dp" />
 
