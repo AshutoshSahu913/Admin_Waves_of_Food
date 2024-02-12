@@ -4,11 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminwavesoffood.Adapter.PendingAdapter
 import com.example.adminwavesoffood.Model.OrderDetails
 import com.example.adminwavesoffood.databinding.ActivityPendingOrdersBinding
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.Circle
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -21,12 +25,8 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
     }
 
     private var listOfName: ArrayList<String> = arrayListOf()
-
-    //    private var listOfTotalQty: MutableList<String> = mutableListOf()
     private var listOfTotalPrice: ArrayList<String> = arrayListOf()
     private var listOfImgFirstFoodOrder: ArrayList<String> = arrayListOf()
-
-    //    private var listOfImgFirstOrder: ArrayList<String> = arrayListOf()
     private var listOfOrderItem: ArrayList<OrderDetails> = arrayListOf()
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseOrderDetails: DatabaseReference
@@ -40,6 +40,8 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         database = FirebaseDatabase.getInstance()
         databaseOrderDetails = database.reference.child("OrderDetails")
 
+        loader()
+        binding.loader.visibility= View.VISIBLE
         getOrderDetails()
 
         binding.backBtn.setOnClickListener {
@@ -56,7 +58,7 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
                         listOfOrderItem.add(it)
                     }
                 }
-                addDataToListForRecyclerView(listOfOrderItem)
+                addDataToListForRecyclerView(/*listOfOrderItem*/)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -66,7 +68,7 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         })
     }
 
-    private fun addDataToListForRecyclerView(listOfOrderItem: ArrayList<OrderDetails>) {
+    private fun addDataToListForRecyclerView(/*listOfOrderItem: ArrayList<OrderDetails>*/) {
         for (orderItem in listOfOrderItem) {
             //add data to respective list for population the recyclerview
             orderItem.userName?.let { listOfName.add(it) }
@@ -83,6 +85,7 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         listOfTotalPrice: ArrayList<String>,
         listOfImgFirstFoodOrder: ArrayList<String>
     ) {
+        binding.loader.visibility= View.GONE
         val adapter = PendingAdapter(
             listOfName,
             listOfTotalPrice,
@@ -99,8 +102,8 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
 
     override fun onItemClickListener(position: Int) {
         val intent = Intent(this, OrderDetailsActivity::class.java)
-        val userOderDetails = listOfOrderItem[position]
-        intent.putExtra("UserOrderDetails", userOderDetails)
+        val userOrderDetails = listOfOrderItem[position]
+        intent.putExtra("UserOrderDetails", userOrderDetails)
         startActivity(intent)
     }
 
@@ -110,7 +113,7 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         val clickItemOrderReference = childItemPushKey?.let {
             database.reference.child("OrderDetails").child(it)
         }
-        clickItemOrderReference?.child("AcceptedOrder")?.setValue(true)
+        clickItemOrderReference?.child("orderAccepted")?.setValue(true)
         updateOrderAcceptStatus(position)
 
     }
@@ -122,19 +125,18 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
         val buyHistoryReference =
             database.reference.child("user").child(userIdOfClickedItem!!).child("BuyHistory")
                 .child(pushKeyOfClickedItem!!)
-        buyHistoryReference.child("AcceptedOrder").setValue(true)
-        databaseOrderDetails.child(pushKeyOfClickedItem).child("AcceptedOrder").setValue(true)
+        buyHistoryReference.child("orderAccepted").setValue(true)
+        databaseOrderDetails.child(pushKeyOfClickedItem).child("orderAccepted").setValue(true)
     }
 
     override fun onItemDispatchClickListener(position: Int) {
         val dispatchItemPushKey = listOfOrderItem[position].itemPushKey
         val dispatchItemOrderReference =
-            database.reference.child("CompleteOrder ").child(dispatchItemPushKey!!)
+            database.reference.child("CompletedOrder").child(dispatchItemPushKey!!)
         dispatchItemOrderReference.setValue(listOfOrderItem[position])
             .addOnSuccessListener {
                 deleteThisItemFromOrderDetails(dispatchItemPushKey)
             }
-
     }
 
     private fun deleteThisItemFromOrderDetails(dispatchItemPushKey: String) {
@@ -148,5 +150,10 @@ class PendingOrders : AppCompatActivity(), PendingAdapter.OnItemClicked {
                 Toast.makeText(this, "Order is not Dispatched", Toast.LENGTH_SHORT).show()
             }
     }
-
+    fun loader() {
+        // code for loader
+        val progressBar = binding.loader as ProgressBar
+        val circle: Sprite = Circle()
+        progressBar.indeterminateDrawable = circle
+    }
 }

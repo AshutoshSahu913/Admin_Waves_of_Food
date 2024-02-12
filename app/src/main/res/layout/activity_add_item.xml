@@ -29,19 +29,21 @@
                 android:src="@drawable/arrow_left"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/black" />
+                app:tint="@color/black"
+
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/yeonsung_regular"
-                android:text="Add Item"
+                android:text="@string/add_food_item"
                 android:textColor="@color/black"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/backBtn" />
+                app:layout_constraintTop_toTopOf="@+id/backBtn" />
 
 
             <LinearLayout
@@ -58,14 +60,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="57dp"
                     android:layout_margin="10dp"
-                    android:outlineSpotShadowColor="@color/appColor"
                     android:background="@drawable/edittextshape"
                     android:drawablePadding="15dp"
-                    android:elevation="1dp"
+                    android:elevation="5dp"
                     android:ems="10"
                     android:fontFamily="@font/yeonsung_regular"
-                    android:hint="Item Name"
+                    android:hint="@string/food_item_name"
                     android:inputType="textPersonName"
+                    android:outlineSpotShadowColor="@color/appColor"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -77,16 +79,17 @@
                     android:layout_height="57dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/edittextshape"
-                    android:outlineSpotShadowColor="@color/appColor"
                     android:drawablePadding="15dp"
-                    android:elevation="1dp"
+                    android:elevation="5dp"
                     android:ems="10"
                     android:fontFamily="@font/yeonsung_regular"
-                    android:hint="Item Price"
+                    android:hint="@string/food_item_price"
                     android:inputType="text"
+                    android:outlineSpotShadowColor="@color/appColor"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="RtlSymmetry" />
 
                 <TextView
                     android:id="@+id/inputItemImg"
@@ -94,13 +97,13 @@
                     android:layout_height="57dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/edittextshape"
-                    android:elevation="1dp"
-                    android:outlineSpotShadowColor="@color/appColor"
+                    android:elevation="5dp"
                     android:fontFamily="@font/yeonsung_regular"
                     android:gravity="center_vertical"
+                    android:outlineSpotShadowColor="@color/appColor"
                     android:paddingStart="10dp"
                     android:paddingEnd="20dp"
-                    android:text="Select Image"
+                    android:text="@string/select_food_image"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:drawableEndCompat="@drawable/pluse_round"
@@ -110,10 +113,10 @@
                     android:id="@+id/cardView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
                     app:cardCornerRadius="10dp"
                     app:cardUseCompatPadding="true"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -134,15 +137,16 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/edittextshape"
                     android:drawablePadding="15dp"
-                    android:elevation="1dp"
-                    android:outlineSpotShadowColor="@color/appColor"
+                    android:elevation="5dp"
                     android:ems="10"
                     android:fontFamily="@font/yeonsung_regular"
-                    android:hint="Short Description"
+                    android:hint="@string/short_food_description"
                     android:inputType="text"
-                    android:paddingLeft="10dp"
+                    android:outlineSpotShadowColor="@color/appColor"
+                    android:paddingStart="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="RtlSymmetry" />
 
 
                 <EditText
@@ -152,12 +156,12 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/edittextshape"
                     android:drawablePadding="15dp"
-                    android:elevation="1dp"
+                    android:elevation="5dp"
                     android:ems="10"
-                    android:outlineSpotShadowColor="@color/appColor"
                     android:fontFamily="@font/yeonsung_regular"
-                    android:hint="Ingredients"
+                    android:hint="@string/food_ingredients"
                     android:inputType="text"
+                    android:outlineSpotShadowColor="@color/appColor"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -166,21 +170,55 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/addItemBtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/greenbuttongradient"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/shape"
                     android:fontFamily="@font/yeonsung_regular"
                     android:text="@string/add_item"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
+
+                <LinearLayout
+                    android:id="@+id/uploadingProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/shape"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="15dp"
+                    android:visibility="gone">
+
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:id="@+id/loader1"
+                        style="@style/SpinKitView.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:SpinKit_Color="@color/white" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/lato"
+                        android:gravity="center_vertical"
+                        android:text="@string/uploading_products"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

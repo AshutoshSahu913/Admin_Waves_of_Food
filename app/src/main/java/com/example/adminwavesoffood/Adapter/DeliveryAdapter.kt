@@ -9,7 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.adminwavesoffood.Model.OrderDetails
 import com.example.adminwavesoffood.databinding.OrderListBinding
 
-class DeliveryAdapter(var orderList: ArrayList<OrderDetails>, var context: Context) :
+class DeliveryAdapter(
+    var cNames: MutableList<String>,
+    private var moneyStatus: MutableList<Boolean>,
+    var context: Context
+) :
     RecyclerView.Adapter<DeliveryAdapter.MyViewHolder>() {
 
 
@@ -18,16 +22,19 @@ class DeliveryAdapter(var orderList: ArrayList<OrderDetails>, var context: Conte
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             binding.apply {
-                var model = orderList[position]
-                customerName.text = model.userName
-                paymentStatus.text = model.orderAccepted.toString()
+                customerName.text = cNames[position]
+                if (moneyStatus[position]) {
+                    paymentStatus.text = "Received"
+                } else {
+                    paymentStatus.text = "Not Received"
+                }
 
                 val colorMap = mapOf(
-                    "received" to Color.GREEN, "notReceived" to Color.RED, "Pending" to Color.GRAY
+                    true to Color.GREEN, false to Color.RED, "Pending" to Color.GRAY
                 )
-                paymentStatus.setTextColor(colorMap[model.orderAccepted.toString()] ?: Color.BLACK)
+                paymentStatus.setTextColor(colorMap[moneyStatus[position]] ?: Color.BLACK)
                 cardColor.backgroundTintList =
-                    ColorStateList.valueOf(colorMap[model.orderAccepted.toString()] ?: Color.BLACK)
+                    ColorStateList.valueOf(colorMap[moneyStatus[position]] ?: Color.BLACK)
             }
         }
 
@@ -46,6 +53,6 @@ class DeliveryAdapter(var orderList: ArrayList<OrderDetails>, var context: Conte
     }
 
     override fun getItemCount(): Int {
-        return orderList.size
+        return cNames.size
     }
 }

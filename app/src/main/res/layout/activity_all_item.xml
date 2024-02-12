@@ -25,13 +25,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/yeonsung_regular"
-        android:text="All Item"
+        android:text="@string/all_food_items"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/backBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/backBtn"
         app:layout_constraintTop_toTopOf="@+id/backBtn" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/loader2"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+        app:SpinKit_Color="@color/appColor"
+        app:layout_constraintBottom_toBottomOf="@+id/rvItemList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rvItemList" />
 
 
     <androidx.recyclerview.widget.RecyclerView

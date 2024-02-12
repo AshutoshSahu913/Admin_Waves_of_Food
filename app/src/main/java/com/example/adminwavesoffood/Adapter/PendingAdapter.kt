@@ -1,5 +1,6 @@
 package com.example.adminwavesoffood.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
@@ -28,8 +29,8 @@ class PendingAdapter(
     inner class MyViewHolder(var binding: PendingListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         var isAccepted = false
+        @SuppressLint("SetTextI18n")
         fun bind(position: Int) {
-
             binding.apply {
                 pendingCustomerName.text = customerName[position]
                 pendingItemTotalPrice.text = totalPrice[position]
@@ -37,35 +38,39 @@ class PendingAdapter(
                 val uriString = foodImg[position]
                 val uri = Uri.parse(uriString)
                 Glide.with(context).load(uri).into(pendingOrderImg)
+
                 pendingOrderBtn.apply {
-                    if (!isAccepted) {
-                        text = "Accept"
+                    text = if (!isAccepted) {
+                        "Accept"
                     } else {
-                        text = "Dispatch"
+                        "Dispatch"
                     }
                     setOnClickListener {
                         if (!isAccepted) {
                             text = "Dispatch"
                             setBackgroundResource(R.drawable.un_shape)
-                            itemClicked.onItemAcceptClickListener(position)
                             isAccepted = true
+                            itemClicked.onItemAcceptClickListener(position)
                             showToast("Order is Accepted")
                         } else {
-                            customerName.removeAt(position)
-                            totalPrice.removeAt(position)
-                            foodImg.removeAt(position)
-                            notifyItemRemoved(position)
-                            itemClicked.onItemDispatchClickListener(position)
                             isAccepted = false
+                            itemClicked.onItemDispatchClickListener(position)
+                            removeItem(position)
                             showToast("Order is Dispatch")
                         }
                     }
-                    itemView.setOnClickListener {
-                        itemClicked.onItemClickListener(position)
-                    }
+                }
+                itemView.setOnClickListener {
+                    itemClicked.onItemClickListener(position)
                 }
             }
         }
+    }
+    fun removeItem(position: Int) {
+        customerName.removeAt(position)
+        totalPrice.removeAt(position)
+        foodImg.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     fun showToast(message: String) {
@@ -82,10 +87,7 @@ class PendingAdapter(
 
     }
 
-
     override fun getItemCount(): Int {
         return customerName.size
     }
-
-
 }

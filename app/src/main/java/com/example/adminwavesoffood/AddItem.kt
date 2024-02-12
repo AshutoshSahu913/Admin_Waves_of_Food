@@ -3,11 +3,15 @@ package com.example.adminwavesoffood
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.adminwavesoffood.Model.ItemModel
 import com.example.adminwavesoffood.databinding.ActivityAddItemBinding
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.Circle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -52,8 +56,12 @@ class AddItem : AppCompatActivity() {
             binding.inputItemPrice.setBackgroundResource(R.drawable.edittextshape)
             binding.inputItemDes.setBackgroundResource(R.drawable.edittextshape)
             binding.inputItemIngredients.setBackgroundResource(R.drawable.edittextshape)
-
+            binding.inputItemImg.setBackgroundResource(R.drawable.edittextshape)
             if (!(foodName.isBlank() || foodPrice.isBlank() || foodDescription.isBlank() || foodIngredient.isBlank())) {
+                binding.addItemBtn.visibility = View.GONE
+                binding.loader1.visibility = View.VISIBLE
+                binding.uploadingProducts.visibility = View.VISIBLE
+                loader1()
                 uploadData()
                 Toast.makeText(this, "Item Add Successfully", Toast.LENGTH_SHORT).show()
             } else {
@@ -77,7 +85,6 @@ class AddItem : AppCompatActivity() {
                 Toast.makeText(this, "Fill All the Details", Toast.LENGTH_SHORT).show()
             }
 
-
         }
 
         binding.inputItemImg.setOnClickListener {
@@ -94,7 +101,7 @@ class AddItem : AppCompatActivity() {
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
             binding.itemImg.setImageURI(uri)
-            foodImg=uri
+            foodImg = uri
         }
     }
 
@@ -106,8 +113,8 @@ class AddItem : AppCompatActivity() {
         val newItemKey = menuRef.push().key
 
         if (foodImg != null) {
-            val storageRef = FirebaseStorage.getInstance().reference
 
+            val storageRef = FirebaseStorage.getInstance().reference
             val imageRef = storageRef.child("menu_images/{$newItemKey}.jpg")
             val uploadTask = imageRef.putFile(foodImg!!)
 
@@ -115,6 +122,7 @@ class AddItem : AppCompatActivity() {
                 imageRef.downloadUrl.addOnSuccessListener { downloadUrl ->
                     //Create a new Menu
                     val newItem = ItemModel(
+                        key = newItemKey,
                         foodName = foodName,
                         foodPrice = foodPrice,
                         foodDes = foodDescription,
@@ -123,20 +131,34 @@ class AddItem : AppCompatActivity() {
                     )
                     newItemKey?.let { key ->
                         menuRef.child(key).setValue(newItem).addOnSuccessListener {
+                            binding.uploadingProducts.visibility = View.GONE
+                            binding.loader1.visibility = View.GONE
                             Toast.makeText(this, "Data Upload Successfully", Toast.LENGTH_SHORT)
                                 .show()
+                            finish()
                         }
                             .addOnFailureListener {
+                                binding.addItemBtn.visibility = View.VISIBLE
+                                binding.uploadingProducts.visibility = View.GONE
                                 Toast.makeText(this, "Data Upload Failed", Toast.LENGTH_SHORT)
                                     .show()
                             }
                     }
                 }
             }.addOnFailureListener {
-                Toast.makeText(this, "Image Upload Failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Data Upload Failed", Toast.LENGTH_SHORT).show()
             }
         } else {
+            binding.inputItemImg.setBackgroundResource(R.drawable.edittextshape_error)
             Toast.makeText(this, "Please Select an Image", Toast.LENGTH_SHORT).show()
         }
+
+    }
+
+    fun loader1() {
+        // code for loader
+        val progressBar = binding.loader1 as ProgressBar
+        val circle: Sprite = Circle()
+        progressBar.indeterminateDrawable = circle
     }
 }

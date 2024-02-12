@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/yeonsung_regular"
-            android:text="Waves of Food"
+            android:text="@string/waves_of_food"
             android:textColor="@color/black"
             android:textSize="40sp" />
 
@@ -51,7 +51,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/lato_regular"
             android:gravity="center"
-            android:text="Create New User Admin "
+            android:text="@string/create_new_user_admin"
             android:textColor="@color/appColor"
             android:textSize="16sp" />
 
@@ -70,10 +70,10 @@
 
         <EditText
             android:id="@+id/inputName"
-            android:layout_width="325dp"
+            android:layout_width="match_parent"
             android:layout_height="57dp"
-
-
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/edittextshape"
             android:drawableStart="@drawable/usernew"
             android:drawablePadding="15dp"
@@ -89,10 +89,11 @@
 
         <EditText
             android:id="@+id/inputEmail"
-            android:layout_width="325dp"
+            android:layout_width="match_parent"
             android:layout_height="57dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-
+            android:layout_marginEnd="20dp"
             android:background="@drawable/edittextshape"
             android:drawableStart="@drawable/mail"
             android:drawablePadding="15dp"
@@ -107,9 +108,11 @@
 
         <EditText
             android:id="@+id/inputPassword"
-            android:layout_width="325dp"
+            android:layout_width="match_parent"
             android:layout_height="57dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/edittextshape"
 
             android:drawableStart="@drawable/lock"
@@ -120,8 +123,9 @@
             android:fontFamily="@font/lato_regular"
             android:hint="Password"
             android:inputType="textPassword"
-            android:paddingLeft="10dp"
-            android:textColor="@color/black" />
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            tools:ignore="RtlSymmetry" />
     </LinearLayout>
 
     <Button
@@ -131,7 +135,8 @@
         android:layout_margin="15dp"
         android:background="@drawable/shape"
         android:fontFamily="@font/yeonsung_regular"
-        android:text="Create New User"
+        android:text="@string/create_new_user"
+        android:elevation="5dp"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

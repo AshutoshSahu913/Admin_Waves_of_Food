@@ -4,5 +4,7 @@ data class UserModel(
     var name:String?=null,
     var nameOfRestaurant:String?=null,
     var email:String?=null,
-    var password:String?=null
+    var password:String?=null,
+    var phone:String?=null,
+    var address:String?=null
 )

@@ -65,7 +65,7 @@
                     app:tint="@color/black" />
 
                 <TextView
-                    android:id="@+id/pendingOrder"
+                    android:id="@+id/pendingOrderBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -76,10 +76,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/pendingOrder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/yeonsung_regular"
-                    android:text="30"
+                    android:text="0"
                     android:textColor="@color/iconColor"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -89,7 +90,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp"
-                android:background="#E6E2E2"/>
+                android:background="#E6E2E2" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -115,19 +117,22 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/completeOrderCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/yeonsung_regular"
-                    android:text="30"
+                    android:text="0"
                     android:textColor="@color/iconColor"
                     android:textSize="20sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="1dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp"
-                android:layout_height="match_parent"
-                android:background="#E6E2E2"/>
+                android:background="#E6E2E2" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -154,10 +159,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/wholeTimeEarning"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/yeonsung_regular"
-                    android:text="₹300"
+                    android:text="0 ₹"
                     android:textColor="@color/iconColor"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -170,7 +176,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
-        app:cardElevation="10dp">
+        app:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="150dp"
@@ -201,7 +207,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
-        app:cardElevation="10dp">
+        app:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="150dp"
@@ -232,7 +238,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
-        app:cardElevation="10dp">
+        app:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="150dp"
@@ -263,7 +269,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
-        app:cardElevation="10dp">
+        app:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="150dp"
@@ -294,7 +300,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
-        app:cardElevation="10dp">
+        app:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="150dp"
@@ -325,7 +331,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
-        app:cardElevation="10dp">
+        app:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="150dp"

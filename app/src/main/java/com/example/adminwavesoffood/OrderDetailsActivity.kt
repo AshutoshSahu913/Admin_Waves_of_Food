@@ -17,6 +17,7 @@ class OrderDetailsActivity : AppCompatActivity() {
 //    private var email: String? = null
 
     private var totalPrice: String? = null
+
     private var foodName: ArrayList<String> = arrayListOf()
     private var foodImg: ArrayList<String> = arrayListOf()
     private var food_Qty: ArrayList<Int> = arrayListOf()

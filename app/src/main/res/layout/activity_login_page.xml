@@ -38,8 +38,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/lato_regular"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/lato"
             android:text="Login To Your\nAdmin Dashboard"
             android:textColor="@color/appColor"
             android:gravity="center"
@@ -160,6 +160,7 @@
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="0dp"
+        android:layout_marginBottom="2dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
@@ -187,7 +188,7 @@
             android:fontFamily="@font/yeonsung_regular"
             android:text="Don't Have Account"
             android:textColor="@color/appColor"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
 
     </LinearLayout>
 
